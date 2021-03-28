@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from icalevents.icalevents import events
+import requests
 #pip3 install icalevents
 
 ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
@@ -37,12 +38,23 @@ def news():
         news.append(stories[i].text)
         #links.append(link)
     return(news)
+def btc():
+    url = "https://api.coindesk.com/v1/bpi/currentprice.json"
+    response = requests.get(url)
+    response_json = response.json()
+    rate = float(response_json["bpi"]["EUR"]["rate_float"])
+    my_money = 0.01189404 + 0.00298343
+    my_money = round(rate * my_money, 2)
+    rate = str(round(rate, 2))
+    return "€" + rate + "\n \n " + "€" + str(my_money) 
+
+    
 
 def icloud():
     sentence = ""
     es = events(url="webcal://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB", fix_apple=True)
-    for i in range(3):
-        sentence = sentence + "\n" + str(es[i])
+    for i in range(4):
+        sentence = sentence + "\n \n" + str(es[i]).split(":")[-1]
     return sentence
 
 

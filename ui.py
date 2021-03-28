@@ -9,9 +9,9 @@ from random import randint
 
 HEIGHT = 700
 WIDTH = 1024
-yellow = "#1a0000"
+yellow = "#595959"
 ##000000
-gray = "#e5e5e5"
+gray = "#ffffff"
 
 root = tk.Tk()
 root.title("GUI Assistant")
@@ -28,7 +28,7 @@ def quotes():
     file = open("quotes.txt", "r")
     quotes = file.readlines()
     line = quotes[randint(0, len(quotes) - 1)]
-    return wrap_by_word(line, 25)
+    return wrap_by_word(line, 20)
     
 
 def GUI():
@@ -39,7 +39,7 @@ def GUI():
         pass
     webscraper.start()
     global image
-    i = Image.open("./galaxy.jpg")
+    i = Image.open("./backgrounds/" + str(randint(1,13)) + ".jpeg")
     i.thumbnail((2000, 1000))
 
     image = ImageTk.PhotoImage( i , master=root)
@@ -52,18 +52,23 @@ def GUI():
     top = tk.Frame(root, bg=yellow)
     top.place(relheight=0.2, relwidth=0.95, rely=0.025, relx=0.025)
 
-    quote = tk.Label(top,  fg=gray, text=quotes(), bg=yellow, font=("Pacifico", 25))
+    quote = tk.Label(top,  fg=gray, text=quotes(), bg=yellow, font=("Pacifico", 22))
     quote.place(relheight=0.8, relwidth=0.9, relx=0.05, rely=0.1)
 
     temp_holder = tk.Frame(root, bg=yellow)
     temp_holder.place(relheight=0.25, relwidth=0.2, rely=0.275, relx=0.025)
 
-    temp = tk.Label(temp_holder, fg=gray, text="Degrees room \n Degrees outside: " + str(webscraper.weather()), font=("Impact", 20), bg=yellow)
+    temp = tk.Label(temp_holder, fg=gray, text="Degrees room \n Degrees outside: " + str(webscraper.weather()), font=("Impact", 22), bg=yellow)
     temp.place(relheight=0.8, relwidth=0.9, relx=0.05, rely=0.1)
+
+    btc_holder = tk.Frame(root, bg=yellow)
+    btc_holder.place(relheight=0.25, relwidth=0.2, rely=0.55, relx=0.025)
+    btc = tk.Label(btc_holder, fg=gray, text=webscraper.btc(), font=("Impact", 22), bg=yellow)
+    btc.place(relheight=0.8, relwidth=0.9, relx=0.05, rely=0.1)
 
     icloud_holder = tk.Frame(root, bg=yellow)
     icloud_holder.place(relheight=0.40, relwidth=0.33, rely=0.275, relx=0.25)
-    calender = tk.Label(icloud_holder, text=webscraper.icloud(),fg=gray,  font=("Impact", 20), bg=yellow)
+    calender = tk.Label(icloud_holder, text=webscraper.icloud(),fg=gray,  font=("Impact", 22), bg=yellow)
     calender.place(relheight=0.99, relwidth=0.99, relx=0.005, rely=0.005)
 
     news_holder = tk.Frame(root, bg=yellow)
