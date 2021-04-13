@@ -1,27 +1,15 @@
-from selenium import webdriver
+from bs4 import BeautifulSoup
 from time import sleep
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import StaleElementReferenceException
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
 from icalevents.icalevents import events
 import requests
 #pip3 install icalevents
 
-ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
-def start():
-    global driver
-    driver = webdriver.Chrome(executable_path="/Users/timangevare/Documents/Code/chromedriver")
-    global wait
-    wait = WebDriverWait(driver, 60, ignored_exceptions=ignored_exceptions)
-
 def weather():
-    driver.get("https://weather.com/weather/today/l/57fae565d25f68b70131cd8683da28e8b595fb41ae07ae5cd2a827af58233bac")
+    link = requests.get("https://weather.com/weather/today/l/57fae565d25f68b70131cd8683da28e8b595fb41ae07ae5cd2a827af58233bac")
+    soup = BeautifulSoup(link.content, 'html.parser')
     sleep(4)
-    temp = driver.find_element_by_class_name("CurrentConditions--tempValue--3KcTQ")
-    farenheit = int(temp.text[0:-1])
+    temp = soup.find("span", {"class" : "CurrentConditions--tempValue--3KcTQ"}).string
+    farenheit = int(temp[0:-1])
     celsuis = int((farenheit - 32)/ (9/5))
     return celsuis
 
@@ -29,15 +17,22 @@ def news():
     global links
     links = []
     news = []
-    driver.get("https://www.forbes.com/?sh=43e5cbfe2254")
-    agree = wait.until(expected_conditions.presence_of_element_located((By.CLASS_NAME, "trustarc-agree-btn")))
-    agree.click()
-    stories = wait.until(expected_conditions.presence_of_all_elements_located((By.CLASS_NAME,"body--dense-merriweather")))
-    for i in range(3):
+    link = requests.get("https://nos.nl/")
+    soup = BeautifulSoup(link.content, 'html.parser')
+    stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
+    for i in range(2):
         #link = stories[i].get_attribute('href')
-        news.append(stories[i].text)
+        news.append(stories[i].string)
         #links.append(link)
+    link = requests.get("https://www.publish0x.com/popular")
+    soup = BeautifulSoup(link.content, 'html.parser')
+    article = soup.find_all("p", {'class' : "pr-2 pt-2"})
+    for i in range(2):
+        news.append(article[i].findChild().text)
+
+    print(news)
     return(news)
+
 def btc():
     url = "https://api.coindesk.com/v1/bpi/currentprice.json"
     response = requests.get(url)
@@ -46,9 +41,8 @@ def btc():
     my_money = 0.01189404 + 0.00298343
     my_money = round(rate * my_money, 2)
     rate = str(round(rate, 2))
-    return "€" + rate + "\n \n " + "€" + str(my_money) 
-
-    
+    return "BTC rate: €" + rate + "\n \n " + "My holdings: €" + str(my_money) 
+ 
 
 def icloud():
     sentence = ""
@@ -56,8 +50,3 @@ def icloud():
     for i in range(4):
         sentence = sentence + "\n \n" + str(es[i]).split(":")[-1]
     return sentence
-
-
-
-def quit():
-    driver.quit()
