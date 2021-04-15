@@ -3,15 +3,14 @@ from time import sleep
 from icalevents.icalevents import events
 import requests
 #pip3 install icalevents
+api_key = "9a6997a12c32dc59721b12ec5be63131"
+url_weather = "https://api.openweathermap.org/data/2.5/weather?q=Amersfoort&units=metric&appid="
 
 def weather():
-    link = requests.get("https://weather.com/weather/today/l/57fae565d25f68b70131cd8683da28e8b595fb41ae07ae5cd2a827af58233bac")
-    soup = BeautifulSoup(link.content, 'html.parser')
-    sleep(4)
-    temp = soup.find("span", {"class" : "CurrentConditions--tempValue--3KcTQ"}).string
-    farenheit = int(temp[0:-1])
-    celsuis = int((farenheit - 32)/ (9/5))
-    return celsuis
+    link = requests.get(url_weather + api_key)
+    response = link.json()
+    temp = response['main']['temp']
+    return temp
 
 def news():
     global links
@@ -29,8 +28,6 @@ def news():
     article = soup.find_all("p", {'class' : "pr-2 pt-2"})
     for i in range(2):
         news.append(article[i].findChild().text)
-
-    print(news)
     return(news)
 
 def btc():
@@ -47,6 +44,9 @@ def btc():
 def icloud():
     sentence = ""
     es = events(url="webcal://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB", fix_apple=True)
+    print(es)
     for i in range(4):
+        print(es[i])
         sentence = sentence + "\n \n" + str(es[i]).split(":")[-1]
+        print(sentence)
     return sentence

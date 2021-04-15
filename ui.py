@@ -29,7 +29,7 @@ def quotes():
     file = open("quotes.txt", "r")
     quotes = file.readlines()
     line = quotes[randint(0, len(quotes) - 1)]
-    return wrap_by_word(line, 20)
+    return wrap_by_word(line, 18)
     
 
 
@@ -47,7 +47,7 @@ my_label.place(x=0, y=0, relheight=1,relwidth=1)
 top = tk.Frame(root, bg=yellow)
 top.place(relheight=0.2, relwidth=0.95, rely=0.025, relx=0.025)
 
-quote = tk.Label(top,  fg=gray, text=quotes(), bg=yellow, font=("Pacifico", 22))
+quote = tk.Label(top,  fg=gray, text=quotes(), bg=yellow, font=("Pacifico", 30))
 quote.place(relheight=0.8, relwidth=0.9, relx=0.05, rely=0.1)
 
 temp_holder = tk.Frame(root, bg=yellow)
@@ -63,13 +63,13 @@ btc.place(relheight=0.8, relwidth=0.9, relx=0.05, rely=0.1)
 
 icloud_holder = tk.Frame(root, bg=yellow)
 icloud_holder.place(relheight=0.40, relwidth=0.33, rely=0.275, relx=0.25)
-calender = tk.Label(icloud_holder, text= 'calender' ,fg=gray,  font=("Impact", 22), bg=yellow)
+calender = tk.Label(icloud_holder, text= 'calender' ,fg=gray,  font=("Impact", 24), bg=yellow)
 calender.place(relheight=0.99, relwidth=0.99, relx=0.005, rely=0.005)
 
 news_holder = tk.Frame(root, bg=yellow)
 news_holder.place(relheight=0.575, relwidth=0.25, relx=0.605 , rely=0.275)
 
-news = tk.Label(news_holder, fg=gray, bg=yellow, font=('impact',18), text='news')
+news = tk.Label(news_holder, fg=gray, bg=yellow, font=('impact',25), text='news')
 news.place(relheight=0.95, relwidth=0.9, relx=0.05, rely=0.025)
 
 def update():
@@ -79,11 +79,11 @@ def update():
     nieuws = webscraper.news()
     verhalen = []
     for x in range(len(nieuws)):
-        verhalen.append(wrap_by_word(nieuws[x], 4))
+        verhalen.append(wrap_by_word(nieuws[x], 3))
     nieuws = " \n ".join(verhalen)
     news.config(text=nieuws)
-    root.after(30000, update())
+    root.after(30000, update)
 
-
+root.after(30000, update)
 root.attributes("-fullscreen", True)
 root.mainloop()
