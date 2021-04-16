@@ -10,7 +10,7 @@ def weather():
     link = requests.get(url_weather + api_key)
     response = link.json()
     temp = response['main']['temp']
-    return temp
+    return int(temp)
 
 def news():
     global links
@@ -21,7 +21,10 @@ def news():
     stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
     for i in range(2):
         #link = stories[i].get_attribute('href')
-        news.append(stories[i].string)
+        if len(stories[i].string) < 57:
+            news.append(stories[i].string)
+        else:
+            pass
         #links.append(link)
     link = requests.get("https://www.publish0x.com/popular")
     soup = BeautifulSoup(link.content, 'html.parser')
@@ -38,15 +41,13 @@ def btc():
     my_money = 0.01189404 + 0.00298343
     my_money = round(rate * my_money, 2)
     rate = str(round(rate, 2))
-    return "BTC rate: €" + rate + "\n \n " + "My holdings: €" + str(my_money) 
+    return "Rate:" + '\n€' + rate + "\n " + "Holdings: \n€" + str(my_money) 
  
 
 def icloud():
     sentence = ""
     es = events(url="webcal://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB", fix_apple=True)
-    print(es)
-    for i in range(4):
-        print(es[i])
-        sentence = sentence + "\n \n" + str(es[i]).split(":")[-1]
-        print(sentence)
+    for i in range(3):
+        event = str(es[i]).replace(')','\n').replace('(','\n')
+        sentence = sentence + "\n" + str(event).split(":")[-1]
     return sentence
