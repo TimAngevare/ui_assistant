@@ -26,7 +26,7 @@ def wrap_by_word(s, n):
     return ret
 
 def quotes():
-    file = open("quotes.txt", "r")
+    file = open("/home/pi/Desktop/ui_assistant/quotes.txt", "r")
     quotes = file.readlines()
     line = quotes[randint(0, len(quotes) - 1)]
     return wrap_by_word(line, 12)
@@ -34,7 +34,7 @@ def quotes():
 
 
 global image
-i = Image.open("./backgrounds/" + str(randint(1,13)) + ".jpeg")
+i = Image.open("/home/pi/Desktop/ui_assistant/backgrounds/" + str(randint(1,13)) + ".jpeg")
 i.thumbnail((2000, 1000))
 
 image = ImageTk.PhotoImage( i , master=root)
