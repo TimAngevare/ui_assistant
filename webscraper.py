@@ -48,6 +48,9 @@ def icloud():
     sentence = ""
     es = events(url="webcal://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB", fix_apple=True)
     for i in range(3):
-        event = str(es[i]).replace(')','\n').replace('(','\n')
-        sentence = sentence + "\n" + str(event).split(":")[-1]
+        try:
+            event = str(es[i]).replace(')','\n').replace('(','\n')
+            sentence = sentence + "\n" + str(event).split(":")[-1]
+        except:
+            pass
     return sentence

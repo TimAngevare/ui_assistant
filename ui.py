@@ -80,14 +80,15 @@ news.place(relheight=0.95, relwidth=0.9, relx=0.05, rely=0.025)
 def update():
     temp.config(text = "Room \n Outside: " + str(webscraper.weather()) + "º")
     btc.config(text = webscraper.btc())
-    calender.config(text = webscraper.icloud())
-    nieuws = webscraper.news()
-    verhalen = []
-    for x in range(len(nieuws)):
-        verhalen.append(wrap_by_word(nieuws[x], 3))
-    nieuws = " \n ".join(verhalen)
-    news.config(text=nieuws)
     date = datetime.now()
+    calender.config(text = webscraper.icloud())
+    if int(date.strftime("%M")) == 30:
+        nieuws = webscraper.news()
+        verhalen = []
+        for x in range(len(nieuws)):
+            verhalen.append(wrap_by_word(nieuws[x], 3))
+        nieuws = " \n ".join(verhalen)
+        news.config(text=nieuws)
     time.config(text=date.strftime("%H:%M"))
     root.after(30000, update)
 
