@@ -81,7 +81,10 @@ def update():
     temp.config(text = "Room \n Outside: " + str(webscraper.weather()) + "º")
     btc.config(text = webscraper.btc())
     date = datetime.now()
-    calender.config(text = webscraper.icloud())
+    try:
+        calender.config(text = webscraper.icloud())
+    except:
+        calender.config(text = "Couldn't reach your calender")
     if int(date.strftime("%M")) == 30:
         nieuws = webscraper.news()
         verhalen = []
