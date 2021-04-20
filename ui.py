@@ -7,6 +7,7 @@ from PIL import Image, ImageTk
 from time import sleep
 from random import randint
 from datetime import datetime
+import bot
 
 HEIGHT = 600
 WIDTH = 1024
@@ -31,7 +32,6 @@ def quotes():
     line = quotes[randint(0, len(quotes) - 1)]
     return wrap_by_word(line, 12)
     
-
 
 global image
 i = Image.open("/home/pi/Desktop/ui_assistant/backgrounds/" + str(randint(1,13)) + ".jpeg")

@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-from time import sleep
 from icalevents.icalevents import events
 import requests
+import random 
 #pip3 install icalevents
 api_key = "9a6997a12c32dc59721b12ec5be63131"
 url_weather = "https://api.openweathermap.org/data/2.5/weather?q=Amersfoort&units=metric&appid="
@@ -14,6 +14,7 @@ def weather():
 
 def news():
     global links
+    global news
     links = []
     news = []
     link = requests.get("https://nos.nl/")
@@ -21,17 +22,40 @@ def news():
     stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
     for i in range(2):
         #link = stories[i].get_attribute('href')
-        if len(stories[i].string) < 57:
+        if len(stories[i].string) < 65:
             news.append(stories[i].string)
         else:
             pass
-        #links.append(link)
+    link = soup.find_all("a", {'class': "link_1QeF8RYd"})
+    for i in range(2):
+        links.append(link[i]['href'])
     link = requests.get("https://www.publish0x.com/popular")
     soup = BeautifulSoup(link.content, 'html.parser')
     article = soup.find_all("p", {'class' : "pr-2 pt-2"})
     for i in range(2):
         news.append(article[i].findChild().text)
-    return(news)
+        links.append(article[i].findChild()['href'])
+
+    link = requests.get("https://www.bellingcat.com/")
+    soup = BeautifulSoup(link.content, 'html.parser')
+    article = soup.find_all('div', {'class' : 'grid_item__content--title'})
+    for i in range(2):
+        title = article[i].findChild().findChild().text
+        if len(title) < 65:
+            news.append(title)
+            links.append(article[i].findChild().findChild()['href'])
+    random_news = []
+    x = 0
+    while x <= 4:
+        num = random.randint(0,len(news))
+        if news[num] not in random_news:
+            random_news.append(news[num])
+            x += 1
+    return(random_news)
+
+def return_links():
+    bot_links = {links[i] : news[i] for i in range(len(links))}
+    return bot_links
 
 def btc():
     url = "https://api.coindesk.com/v1/bpi/currentprice.json"

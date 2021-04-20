@@ -1,5 +1,6 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
+import webscraper
 
 
 # Telegram bot
@@ -11,14 +12,22 @@ def start(update, context):
 
 def links(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Sending current links...")
+    articles = webscraper.return_links()
+    message = ""
+    for link, story in articles.items():
+        message += story + "\n\n" + link + "\n\n"
+    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+
 
 def quote(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Which quote do you wanna add")
-    controller.pulse((47,11,9))
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Thankyou!")
+    quote = update.message.text
+    file = open("/home/pi/Desktop/ui_assistant/quotes.txt", "a")
+    file.write(quote)
+    file.close()
 
 def sleep(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id,text="Goodnight Tim")
-    controller.pulse((26,38,18))
 
 def stopping(update,context):
     context.bot.send_message(chat_id=update.effective_chat.id,text="Bye Bye")
