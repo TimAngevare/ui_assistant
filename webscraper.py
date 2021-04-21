@@ -22,6 +22,7 @@ def news():
     stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
     for i in range(2):
         #link = stories[i].get_attribute('href')
+        print(stories[i].string)
         if len(stories[i].string) < 65:
             news.append(stories[i].string)
         else:
@@ -33,6 +34,7 @@ def news():
     soup = BeautifulSoup(link.content, 'html.parser')
     article = soup.find_all("p", {'class' : "pr-2 pt-2"})
     for i in range(2):
+        print(article[i].findChild().text)
         news.append(article[i].findChild().text)
         links.append(article[i].findChild()['href'])
 
@@ -42,6 +44,7 @@ def news():
     for i in range(2):
         title = article[i].findChild().findChild().text
         if len(title) < 65:
+            print(title)
             news.append(title)
             links.append(article[i].findChild().findChild()['href'])
     random_news = []
