@@ -51,7 +51,9 @@ def news():
         if news[num] not in random_news:
             random_news.append(news[num])
             x += 1
-    return(random_news)
+    print(news)
+    print(random_news)
+    return random_news
 
 def return_links():
     bot_links = {links[i] : news[i] for i in range(len(links))}
