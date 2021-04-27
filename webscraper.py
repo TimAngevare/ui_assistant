@@ -12,7 +12,7 @@ def weather():
     temp = response['main']['temp']
     return int(temp)
 
-def news():
+def get_news():
     global links
     global news
     links = []
@@ -22,8 +22,7 @@ def news():
     stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
     for i in range(2):
         #link = stories[i].get_attribute('href')
-        print(stories[i].string)
-        if len(stories[i].string) < 65:
+        if len(stories[i].string) < 70:
             news.append(stories[i].string)
         else:
             pass
@@ -43,17 +42,16 @@ def news():
     article = soup.find_all('div', {'class' : 'grid_item__content--title'})
     for i in range(2):
         title = article[i].findChild().findChild().text
-        if len(title) < 65:
-            print(title)
-            news.append(title)
-            links.append(article[i].findChild().findChild()['href'])
+        news.append(title)
+        links.append(article[i].findChild().findChild()['href'])
     random_news = []
     x = 0
-    while x <= 4:
-        num = random.randint(0,len(news))
-        if news[num] not in random_news:
-            random_news.append(news[num])
-            x += 1
+    while x <= 2:
+        num = random.randint(0,len(news) - 1)
+        print(num)
+        random_news.append(news[num])
+        news.pop(num)
+        x += 1
     print(news)
     print(random_news)
     return random_news
@@ -67,7 +65,7 @@ def btc():
     response = requests.get(url)
     response_json = response.json()
     rate = float(response_json["bpi"]["EUR"]["rate_float"])
-    my_money = 0.01189404 + 0.00298343
+    my_money = 0.01790922 + 0.00298343
     my_money = round(rate * my_money, 2)
     rate = str(round(rate, 2))
     return "Rate:" + '\n€' + rate + "\n " + "Holdings: \n€" + str(my_money) 

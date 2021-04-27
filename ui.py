@@ -77,6 +77,16 @@ news_holder.place(relheight=0.7, relwidth=0.375, relx=0.605 , rely=0.275)
 news = tk.Label(news_holder, fg=gray, bg=yellow, font=('impact',18), text='news')
 news.place(relheight=0.95, relwidth=0.9, relx=0.05, rely=0.025)
 
+def update_news():
+    nieuws = webscraper.get_news()
+    verhalen = []
+    for x in range(len(nieuws)):
+        verhalen.append(wrap_by_word(nieuws[x], 3))
+    nieuws_string = " \n ".join(verhalen)
+    news.config(text=nieuws_string)
+
+update_news()
+
 def update():
     temp.config(text = "Room \n Outside: " + str(webscraper.weather()) + "º")
     btc.config(text = webscraper.btc())
@@ -85,13 +95,13 @@ def update():
         calender.config(text = webscraper.icloud())
     except:
         calender.config(text = "Couldn't reach your calender")
-    if int(date.strftime("%M")) == 30:
-        nieuws = webscraper.news()
-        verhalen = []
-        for x in range(len(nieuws)):
-            verhalen.append(wrap_by_word(nieuws[x], 3))
-        nieuws = " \n ".join(verhalen)
-        news.config(text=nieuws)
+    if int(date.strftime("%M")) % 29 == 0:
+        try:
+            update_news()
+        except:
+            sleep(120)
+            print('news update failed')
+            update_news()
     time.config(text=date.strftime("%H:%M"))
     root.after(30000, update)
 
