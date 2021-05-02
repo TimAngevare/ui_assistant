@@ -1,21 +1,21 @@
 status: 200
 server: AppleHttpServer/4b0f4e40276cabbbae998f715d1fd1336e7478a2
-date: Sun, 25 Apr 2021 08:07:59 GMT
+date: Tue, 27 Apr 2021 18:19:30 GMT
 content-type: text/calendar; charset=UTF-8
 connection: keep-alive
-x-apple-jingle-correlation-key: UISQFQDYRRFL7FTNGNAJGXOIN4
+x-apple-jingle-correlation-key: 2WHAQL5XFFA7BPAASMHCUK5Z5M
 apple-seq: 0
 apple-tk: false
 apple-originating-system: UnknownOriginatingSystem
-x-responding-instance: caldavj:3:p65-caldavj-bb89cc499-sk84d:80:2106B637:f6d5062b0f8f
+x-responding-instance: caldavj:3:p65-caldavj-bb89cc499-gq5lp:80:2106B637:f6d5062b0f8f
 x-apple-api-version: v1
-etag: "HwoQEgwAAA8XZ8a6qgAAAAAYARgAIhYI/5+1msOuiILZARC3/dz78e/txr8BKAA="
+etag: "HwoQEgwAAA9IFdVNywAAAAAYARgAIhYI/5+1msOuiILZARC3/dz78e/txr8BKAA="
 strict-transport-security: max-age=31536000; includeSubDomains;
-via: xrail:pv54p00ic-qujn05142301.me.com:8301:21D31:grp40,631194250daa17e24277dea86cf30319:fc0adb50d8715439368ac39f1fa4f095:nlhfd1
-x-apple-request-uuid: a22502c0-788c-4abf-966d-3340935dc86f
+via: xrail:pv54p00ic-qujn11153201.me.com:8301:21D36:grp40,631194250daa17e24277dea86cf30319:b1ff0830d7089a486cab5ea34b493885:nlhfd1
+x-apple-request-uuid: d58e082f-b729-41f0-bc00-930e2a2bb9eb
 access-control-expose-headers: X-Apple-Request-UUID,Via
-x-apple-edge-response-time: 451
-content-length: 39646
+x-apple-edge-response-time: 620
+content-length: 39960
 -content-encoding: gzip
 content-location: https://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB
 
@@ -221,6 +221,17 @@ LAST-MODIFIED:20201009T220558Z
 DTSTAMP:20201019T142554Z
 DTSTART;VALUE=DATE:20201020
 SEQUENCE:0
+URL;VALUE=URI:
+END:VEVENT
+BEGIN:VEVENT
+CREATED:20210426T110348Z
+DTEND;TZID=Europe/Amsterdam:20210506T140000
+DTSTAMP:20210426T110348Z
+DTSTART;TZID=Europe/Amsterdam:20210506T130000
+LAST-MODIFIED:20210426T110348Z
+SEQUENCE:0
+SUMMARY:Herroepingsrecht huurwoningen.nl
+UID:1DB59EB8-B943-4BD7-A9FB-D73B45406A32
 URL;VALUE=URI:
 END:VEVENT
 BEGIN:VEVENT
@@ -536,7 +547,7 @@ BEGIN:VEVENT
 DTEND;TZID=Europe/Amsterdam:20210405T200000
 DTSTART;TZID=Europe/Amsterdam:20210405T190000
 UID:661AB391-98FD-43F9-B656-6C2396B8488C
-DTSTAMP:20210419T164815Z
+DTSTAMP:20210426T170228Z
 URL;VALUE=URI:
 SEQUENCE:1
 SUMMARY:Luc bijles

@@ -19,14 +19,14 @@ def get_news():
     news = []
     link = requests.get("https://nos.nl/")
     soup = BeautifulSoup(link.content, 'html.parser')
-    stories =  soup.find_all("h2", {'class' : "title_2P9RJtrp"})
+    stories =  soup.find_all("h2", {'class' : "e48nto-2 jgcOpr"})
     for i in range(2):
         #link = stories[i].get_attribute('href')
         if len(stories[i].string) < 70:
             news.append(stories[i].string)
         else:
             pass
-    link = soup.find_all("a", {'class': "link_1QeF8RYd"})
+    link = soup.find_all("a", {'class': "sc-1kyc94c-3 NaOUj"})
     for i in range(2):
         links.append(link[i]['href'])
     link = requests.get("https://www.publish0x.com/popular")
@@ -62,13 +62,16 @@ def return_links():
 
 def btc():
     url = "https://api.coindesk.com/v1/bpi/currentprice.json"
-    response = requests.get(url)
-    response_json = response.json()
-    rate = float(response_json["bpi"]["EUR"]["rate_float"])
-    my_money = 0.01790922 + 0.00298343
-    my_money = round(rate * my_money, 2)
-    rate = str(round(rate, 2))
-    return "Rate:" + '\n€' + rate + "\n " + "Holdings: \n€" + str(my_money) 
+    try:
+        response = requests.get(url)
+        response_json = response.json()
+        rate = float(response_json["bpi"]["EUR"]["rate_float"])
+        my_money = 0.01790922 + 0.00298343
+        my_money = round(rate * my_money, 2)
+        rate = str(round(rate, 2))
+        return "Rate:" + '\n€' + rate + "\n " + "Holdings: \n€" + str(my_money)
+    except:
+        return "could not \nreturn price"
  
 
 def icloud():
