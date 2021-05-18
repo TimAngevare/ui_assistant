@@ -7,7 +7,6 @@ from PIL import Image, ImageTk
 from time import sleep
 from random import randint
 from datetime import datetime
-import bot
 
 HEIGHT = 600
 WIDTH = 1024
@@ -34,7 +33,8 @@ def quotes():
     
 
 global image
-i = Image.open("/home/pi/Desktop/ui_assistant/backgrounds/" + str(randint(1,13)) + ".jpeg")
+webscraper.get_pic()
+i = Image.open("backgroundpic.jpg")
 i.thumbnail((2000, 1000))
 
 image = ImageTk.PhotoImage( i , master=root)

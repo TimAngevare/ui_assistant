@@ -1,10 +1,26 @@
 from bs4 import BeautifulSoup
 from icalevents.icalevents import events
 import requests
-import random 
+import random
 #pip3 install icalevents
+
 api_key = "9a6997a12c32dc59721b12ec5be63131"
+api_key_unsplash = "J-zWY_JnuakfNtYuiCuxei8X_7q43IVscndj_hdPz8o"
 url_weather = "https://api.openweathermap.org/data/2.5/weather?q=Amersfoort&units=metric&appid="
+
+def get_pic():
+    unsplash_link = "https://api.unsplash.com/photos/random/?client_id="
+    query = "&orientation=landscape"
+
+    image_json = requests.get(unsplash_link + api_key_unsplash + query)
+    parse = image_json.json()
+    img_link = parse["urls"]['full']
+
+    image = requests.get(img_link).content
+    with open('backgroundpic.jpg', 'wb') as image_file:
+        image_file.write(image)
+        image_file.close()
+
 
 def weather():
     link = requests.get(url_weather + api_key)
