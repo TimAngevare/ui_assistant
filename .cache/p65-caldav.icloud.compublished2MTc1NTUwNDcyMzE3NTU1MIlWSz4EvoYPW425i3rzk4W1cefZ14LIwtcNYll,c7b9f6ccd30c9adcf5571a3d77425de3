@@ -1,20 +1,20 @@
 status: 200
-server: AppleHttpServer/ba512e728b68b6da7d047b7c7c12cae42f0df279
-date: Fri, 18 Jun 2021 09:26:50 GMT
+server: AppleHttpServer/4b0f4e40276cabbbae998f715d1fd1336e7478a2
+date: Fri, 18 Jun 2021 19:17:16 GMT
 content-type: text/calendar; charset=UTF-8
 connection: keep-alive
-x-apple-jingle-correlation-key: RG4AGIJZAVD4DNTMZF4DGVW3AU
+x-apple-jingle-correlation-key: TUCYXGXBUJDDPFZG6GN64C45CE
 apple-seq: 0
 apple-tk: false
 apple-originating-system: UnknownOriginatingSystem
-x-responding-instance: caldavj:3:p65-caldavj-6c7b5469f9-t6wk7:80:2110B548:91c5c52b7f3e
+x-responding-instance: caldavj:3:p65-caldavj-6c7b5469f9-88qr8:80:2110B548:91c5c52b7f3e
 x-apple-api-version: v1
-etag: "HwoQEgwAABNUqEHTJgAAAAAYARgAIhYI/5+1msOuiILZARC3/dz78e/txr8BKAA="
+etag: "HwoQEgwAABNc4veyUwAAAAAYARgAIhYI/5+1msOuiILZARC3/dz78e/txr8BKAA="
 strict-transport-security: max-age=31536000; includeSubDomains;
-via: xrail:pv54p00ic-qujn12141701.me.com:8301:21D104:grp40,631194250daa17e24277dea86cf30319:735f0642e14aa84cc9a1947507a62cc6:nlhfd1
-x-apple-request-uuid: 89b80321-3905-47c1-b66c-c9783356db05
+via: xrail:pv54p00ic-qujn05142301.me.com:8301:21D104:grp40,631194250daa17e24277dea86cf30319:52e4edcc9a272e37425ed561329b9fcc:nlhfd1
+x-apple-request-uuid: 9d058b9a-e1a2-4637-9726-f19bee0b9d11
 access-control-expose-headers: X-Apple-Request-UUID,Via
-x-apple-edge-response-time: 514
+x-apple-edge-response-time: 579
 content-length: 45399
 -content-encoding: gzip
 content-location: https://p65-caldav.icloud.com/published/2/MTc1NTUwNDcyMzE3NTU1MIlWSz4EvoYPW425i3rzk4W1cefZ14LIwtcNYllAipAB
@@ -398,7 +398,7 @@ UID:27BF0067-7E97-4DAF-BC38-3CEFED2BD782
 DTEND;TZID=Europe/Amsterdam:20210618T180000
 SUMMARY:Bbq jeroen
 LAST-MODIFIED:20210611T072947Z
-DTSTAMP:20210617T161158Z
+DTSTAMP:20210618T121831Z
 DTSTART;TZID=Europe/Amsterdam:20210618T160000
 SEQUENCE:0
 URL;VALUE=URI:
@@ -1000,7 +1000,7 @@ UID:9C2FE6ED-A243-4AC3-9BCD-9526B3280C26
 DTEND;TZID=Europe/Amsterdam:20210618T124500
 SUMMARY:skype gesprek uni
 LAST-MODIFIED:20210617T212225Z
-DTSTAMP:20210618T092554Z
+DTSTAMP:20210618T093130Z
 DTSTART;TZID=Europe/Amsterdam:20210618T114500
 SEQUENCE:1
 END:VEVENT

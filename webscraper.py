@@ -73,8 +73,19 @@ def get_news():
     return random_news
 
 def return_links():
-    bot_links = {links[i] : news[i] for i in range(len(links) - 1)}
+    bot_links = {}
+    for i in range(len(links)-1):
+        try:
+            bot_links[links[i]] = news[i]
+        except:
+            pass
+    
     return bot_links
+            
+                   
+                   
+    #bot_links = {links[i] : news[i] for i in range(len(links) - 1)}
+    #return bot_links
 
 def btc():
     url = "https://api.coindesk.com/v1/bpi/currentprice.json"
