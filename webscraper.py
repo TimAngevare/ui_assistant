@@ -73,7 +73,7 @@ def get_news():
     return random_news
 
 def return_links():
-    bot_links = {links[i] : news[i] for i in range(len(links))}
+    bot_links = {links[i] : news[i] for i in range(len(links) - 1)}
     return bot_links
 
 def btc():
