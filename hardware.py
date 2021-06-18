@@ -1,4 +1,3 @@
-import RPi.GPIO as GPIO
 from time import sleep
 import webscraper
 import smtplib, ssl
@@ -14,15 +13,9 @@ Subject: Your links
 
 
 """
-
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.board)
-GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-
-while True:
-    if GPIO.input(12) == GPIO.HIGH:
-        links = webscraper.return_links()
-        with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-            server.login(mail,  password)
-            server.send(mail, mail_reciever, message + links)
-        sleep(1)
+def send_mail():
+    links = webscraper.return_links()
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login(mail,  password)
+        server.send(mail, mail_reciever, message + links)
+    sleep(1)

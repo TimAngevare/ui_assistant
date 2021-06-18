@@ -3,10 +3,15 @@ from tkinter import Label, font
 from tkinter.constants import ANCHOR
 from typing import Text
 import webscraper
+import hardware
 from PIL import Image, ImageTk
 from time import sleep
 from random import randint
 from datetime import datetime
+import RPi.GPIO as GPIO
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.board)
 
 HEIGHT = 600
 WIDTH = 1024
@@ -16,6 +21,9 @@ gray = "#ffffff"
 
 root = tk.Tk()
 root.title("GUI Assistant")
+
+def button_pressed():
+    hardware.send_mail()
 
 def wrap_by_word(s, n):
     a = s.split()
@@ -43,6 +51,9 @@ my_label.place(x=0, y=0, relheight=1,relwidth=1)
 
 #canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 #canvas.pack()
+
+GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.add_event_detect(10, GPIO.RISING, callback=button_pressed)
 
 top = tk.Frame(root, bg=yellow)
 top.place(relheight=0.2, relwidth=0.95, rely=0.025, relx=0.025)
