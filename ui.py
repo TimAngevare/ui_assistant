@@ -11,7 +11,7 @@ from datetime import datetime
 import RPi.GPIO as GPIO
 
 GPIO.setwarnings(False)
-GPIO.setmode(GPIO.board)
+GPIO.setmode(GPIO.BOARD)
 
 HEIGHT = 600
 WIDTH = 1024
@@ -22,7 +22,7 @@ gray = "#ffffff"
 root = tk.Tk()
 root.title("GUI Assistant")
 
-def button_pressed():
+def button_pressed(channel):
     hardware.send_mail()
 
 def wrap_by_word(s, n):
