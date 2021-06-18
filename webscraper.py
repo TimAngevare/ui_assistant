@@ -68,9 +68,9 @@ def get_news():
         random_news.append(news[num])
         news.pop(num)
         x += 1
-    print(news)
-    print(random_news)
+    print(links)
     return random_news
+
 
 def return_links():
     bot_links = {}
